@@ -1,18 +1,13 @@
 import os
 
+def checkFile(func):
+    def wrapper(vals):
+        if os.path.exists(vals[1]):
+            return func(vals)
+        else:
+            return "Error: File does not exist"
+    return wrapper
 
-def getFileName():
-	done = False
-	filename = ""
-	while not done:
-		filename = str(input("Filename:"))
-		try:
-			f = open(filename, "rb")
-			done = True
-			f.close()
-		except:
-			print("Invalid filename.")
-	return filename
 
 def encode(vals):
 	filename =  vals[1]
@@ -22,6 +17,7 @@ def encode(vals):
 		f.close()
 	return("Encoding SUCCESS")
 
+@checkFile
 def decode(vals):
 	filename =  vals[1]
 	with open(filename, "rb") as f:
