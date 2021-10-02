@@ -8,14 +8,14 @@ def checkFile(func):
             return "Error: File does not exist"
     return wrapper
 
-
+@checkFile
 def encode(vals):
 	filename =  vals[1]
 	message = vals[0]
 	with open(filename, "ab") as f:
 		f.write(bytes(message, "UTF-8"))
 		f.close()
-	return("Encoding SUCCESS")
+	return "Encoding SUCCESS"
 
 @checkFile
 def decode(vals):
@@ -26,8 +26,8 @@ def decode(vals):
 		f.seek(pointerIndex)
 		byteData = f.read()
 
-	print(byteData.decode("UTF-8"))
 	return byteData.decode("UTF-8")
+	#print(byteData.decode("UTF-8"))
 
 # def strip():
 # 	filename = getFileName()
